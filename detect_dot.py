@@ -3,6 +3,9 @@ import numpy as np
 import zipfile
 import time
 import shutil
+import redis
+import json
+r = redis.Redis(host='localhost', port=6379, db=0)
 # Specifying upper and lower ranges of color to detect in hsv format
 lower = np.array([0, 50, 50])
 upper = np.array([10, 255, 255]) # (These ranges will detect red)
@@ -51,7 +54,7 @@ for k in range(1, 101):
     mean.append(round(float((sum(total_sum[int(k-1)]))/600),2))
     cord.append(cord_vid)
     mean_dict[k] = mean[int(k-1)]
-
+    r.set('coordinates', json.dumps(cord))
 sorted_mean_dict = sorted(mean_dict.items(), key=lambda x: x[1], reverse=False) #sorting the mean dictionary in ascending order
 #print(sorted_mean_dict)
 closest_vid = ([item[0] for item in sorted_mean_dict])[:5]
@@ -60,5 +63,7 @@ closest_vid_mean = ([item[1] for item in sorted_mean_dict])[:5]
 furthest_vid_mean = ([item[1] for item in sorted_mean_dict])[-5:]
 print("The videos with dot coming closest to starting point on average are {} with mean {}" .format(closest_vid, closest_vid_mean))
 print("The videos with dot coming Furthest to starting point on average are {} with mean {}" .format(furthest_vid, furthest_vid_mean))
+r.set('closest_vid_num', json.dumps(closest_vid))
+r.set('furthest_vid_num', json.dumps(furthest_vid))
 cv2.destroyAllWindows()
 shutil.rmtree('videos')

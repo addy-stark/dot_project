@@ -1,0 +1,7 @@
+This project has been designed to create and detect mock image data using a numpy array bacground with a red dot moiving around randomly all over the video frame. Its capable of generating as many number of videos as required with an adjustable frame size ,FPS, dot radius and its colour.
+The detection part is done using opencv and is visualized using scatter plot of the dot movement. The detection also creates a result in the form of mean which establishes a relation for deciding similar or un-similar videos.
+
+## Instructions for using
+1. Install all the libraries from requirements.txt in a virtual environment and activate it.
+2. Create the videos by running create_dots scripts by using command `python3 create_dots.py`. The FPS, Frame size and background of the video can be adjusted in this. Furthermore, the colour of the dot, its thickness and radius can also be adjusted in this script. All the videos will be saved in a zipped folder caller **python.zip**
+3. Detect the movement of dots in all video with the comparison between the videos with dots coming the closest to the starting point on average to the farthest. This script can be started by running command `python3 detect_dot.py` with the visualisation of all the dot positions between the videos with the least mean to the highest mean in a scatter plot.

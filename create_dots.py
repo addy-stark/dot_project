@@ -1,14 +1,11 @@
-import time
 import os
 import zipfile
 import cv2
 import numpy as np
 import shutil
-import glob
 from random import randint
 frameSize = (100, 100)
 fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-#out = cv2.VideoWriter('test_video.mp4', fourcc, 1, frameSize)
 
 
 # Radius of circle
@@ -40,7 +37,6 @@ for k in range(1, 101): #creating 100 videos
     out.release()
     cv2.destroyAllWindows()
     print("video {} created" .format(int(k)))
-    #time.sleep(1)
 
 with zipfile.ZipFile('Python.zip', 'w', zipfile.ZIP_DEFLATED) as zipf:
     zipdir('videos/', zipf)

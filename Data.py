@@ -27,6 +27,5 @@ def plot(close_vid, furth_vid):
 if __name__ == "__main__":
     clos_vid_values = json.loads(r.get('closest_vid_num'))
     furth_vid_values = json.loads(r.get('furthest_vid_num'))
-    print(furth_vid_values)
     plot(clos_vid_values, furth_vid_values)
 
